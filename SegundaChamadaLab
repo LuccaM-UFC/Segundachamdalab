@@ -1,0 +1,118 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
+
+float AproxPI (float n);
+int SomaPX (int *n, int x, int a);
+int Palindromo (int *n, int x);
+int DaquiAteAqui(int *n, int i, int j);
+void OndeTem(int *n, int x);
+
+int main (){
+	//Questão 01:
+	/*printf ("%.4f\n", aproxPI(4));*/
+
+	//Questão 02:
+	/*int n , fat , mult ;
+	printf (" digite n (> 1): ") ;
+	n = 8;
+	fat = 2;
+	while ( n > 1) {
+		mult = 0;
+		while ( n % fat == 0) {
+			mult ++;
+			n = n / fat ;
+		}
+		if ( mult != 0) {
+			printf (" fat %d mult %d\n", fat , mult );
+		}
+		fat ++;
+	}*/
+	
+	//Questão 03:
+	/*int n [] = {1, 1 ,1 ,1 ,1, 1, 1};*/
+	/*SomaPX(n, 5 , 2);*/
+	
+	//Questão 04:
+	/*Palindromo(n, 5);*/
+	//Item a:
+	/*DaquiAteAqui(n,2, 7);*/
+	//Item b:
+	/*OndeTem(n, 7);*/
+	
+	system ("pause");
+	return 0;
+}
+
+void OndeTem(int *n, int x){
+		for(int i = 0; i < x; i++){
+			if( DaquiAteAqui(n,i,x) == 1){
+				for (int j = i; j < x; j++ ){
+					printf("%d",n[j]);
+				}
+				printf("\n");
+			}
+		}
+}
+
+
+int DaquiAteAqui(int *n, int i, int j){
+	
+	i = i-1;
+	
+	int tam = j - i, a[tam], aux = i, inicial = 0;
+	
+	for ( ;aux < j;aux ++){
+		a[inicial] = n[aux];
+		inicial++;
+	}
+	return Palindromo(a,tam);
+}
+
+
+int Palindromo (int *n, int x){
+	int a[x];
+	x = x-1;
+	
+	for(int i = x; i > -1; i--){
+			a[x-i] = n[i];
+	}
+	for(int i = 0; i <= x;i++){
+		if(a[i] == n[i]){
+			printf("ok\n");
+		}else{
+			printf("nao eh palindromo.");
+			return 0;
+			break;
+		}
+	}
+	return 1;
+}
+
+
+int SomaPX (int *n, int x, int a){
+	
+	for(int i = 0; i < x; i++){
+		for (int j = i+1; j < x; j++ ){
+			if(n[i] + n[j] == a){
+				printf ("na casa %d %d + %d na casa %d = %d\n",i, n[i], n[j], j, a );
+			}
+		}
+	}
+}
+
+float AproxPI (float n){
+	
+	int impar = 1, sinal = 1;
+	if (n == 1){
+		return 4.0;
+	}else{
+		for (int i = 1; i < n; i++){
+			impar = impar + 2;
+			}
+		for (int i = 1; i < n; i++){
+			sinal = sinal * (-1);
+		}
+		return ((4.0/impar)*sinal + AproxPI(n-1));
+	}
+}
